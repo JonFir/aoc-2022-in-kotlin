@@ -37,7 +37,6 @@ fun main() {
 
     val testResult2 = part2(readInputAsText("../input/d3/test"))
     check(testResult2 == 70)
-
     val realResult2 = part2(readInputAsText("../input/d3/real"))
     check(realResult2 == 2276)
 }
