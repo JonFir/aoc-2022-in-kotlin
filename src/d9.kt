@@ -3,15 +3,15 @@ import kotlin.math.absoluteValue
 data class D9Command(val direction: String, val distance: Int) {
     companion object Factory {
         fun parse(rawCommand: String): D9Command {
-            val rawCommand = rawCommand.split(" ")
-            return D9Command(rawCommand[0], rawCommand[1].toInt())
+            val components = rawCommand.split(" ")
+            return D9Command(components[0], components[1].toInt())
         }
     }
 }
 
 data class D9Position(var y: Int, var x: Int) {
 
-    fun move(direction: String): Unit {
+    fun move(direction: String) {
         when (direction) {
             "U" -> y += 1
             "D" -> y -= 1
@@ -21,7 +21,7 @@ data class D9Position(var y: Int, var x: Int) {
         }
     }
 
-    fun follow(position: D9Position): Unit {
+    fun follow(position: D9Position) {
         val yDif = position.y - y
         val xDif = position.x - x
         val dif = yDif.absoluteValue + xDif.absoluteValue
@@ -45,8 +45,8 @@ fun main() {
         val train = List(trainSize) { D9Position() }
         val positionHistory = mutableSetOf<D9Position>()
 
-        for (command in input) {
-            val command = D9Command.parse(rawCommand = command)
+        for (rawCommand in input) {
+            val command = D9Command.parse(rawCommand)
 
             for (i in 0 until command.distance) {
                 train[0].move(command.direction)
